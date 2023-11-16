@@ -1,5 +1,6 @@
 package com.startsoft.gocareerapi.iam.infrastructure.tokens.jwt.services;
 
+import com.startsoft.gocareerapi.iam.application.internal.outboundservices.tokens.TokenService;
 import com.startsoft.gocareerapi.iam.infrastructure.tokens.jwt.BearerTokenService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

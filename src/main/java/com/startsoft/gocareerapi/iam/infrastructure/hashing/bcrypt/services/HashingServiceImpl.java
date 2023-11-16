@@ -1,5 +1,6 @@
 package com.startsoft.gocareerapi.iam.infrastructure.hashing.bcrypt.services;
 
+import com.startsoft.gocareerapi.iam.application.internal.outboundservices.hashing.HashingService;
 import com.startsoft.gocareerapi.iam.infrastructure.hashing.bcrypt.BCryptHashingService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
