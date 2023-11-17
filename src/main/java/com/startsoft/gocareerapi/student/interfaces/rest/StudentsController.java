@@ -23,8 +23,8 @@ public class StudentsController {
     }
 
     @GetMapping("/{studentId}")
-    public ResponseEntity<StudentResource> getStudentBydId(@PathVariable String studentId) {
-        var getStudentByIdQuery = new GetStudentByIdQuery(Long.parseLong(studentId));
+    public ResponseEntity<StudentResource> getStudentBydId(@PathVariable Long studentId) {
+        var getStudentByIdQuery = new GetStudentByIdQuery(studentId);
         var student = studentQueryService.handle(getStudentByIdQuery);
         if (student.isEmpty()) return ResponseEntity.notFound().build();
         var studentResource = StudentResourceFromEntityAssembler.toResourceFromEntity(student.get());
