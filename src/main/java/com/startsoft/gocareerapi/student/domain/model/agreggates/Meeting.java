@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Entity
 public class Meeting {
@@ -25,14 +28,14 @@ public class Meeting {
      * The date of the metting.
      */
     @Getter
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String Date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date Date;
 
     public Meeting() {
     }
 
 
-    public Meeting(String Title, String Description, String Date){
+    public Meeting(String Title, String Description, Date Date){
         if (Title == null || Title.isBlank() ) {
             throw new IllegalArgumentException("Title can not be null");
         }
@@ -41,7 +44,7 @@ public class Meeting {
             throw new IllegalArgumentException("Description can not be null");
         }
 
-        if (Date == null ||Date.isBlank() ) {
+        if (Date == null ) {
             throw new IllegalArgumentException("Date can not be null");
         }
 
