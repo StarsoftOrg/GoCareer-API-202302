@@ -1,10 +1,12 @@
 package com.startsoft.gocareerapi.student.domain.model.agreggates;
 
+import com.startsoft.gocareerapi.student.domain.model.entities.Question;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@EntityListeners(AuditingEntityListener.class)
+import java.util.List;
+
+
 @Entity
 public class VocacionalTest {
     @Id
@@ -12,5 +14,11 @@ public class VocacionalTest {
     @Getter
     private Long id;
 
+    @Getter
+    private String Title;
+
+    @Getter
+    @OneToMany(mappedBy = "vocacionalTest")
+    private List<Question> Questions;
 
 }
