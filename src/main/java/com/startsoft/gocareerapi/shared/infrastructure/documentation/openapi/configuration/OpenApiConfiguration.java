@@ -1,5 +1,6 @@
 package com.startsoft.gocareerapi.shared.infrastructure.documentation.openapi.configuration;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -13,18 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfiguration {
     @Bean
     public OpenAPI learningPlatformOpenApi() {
-
-        return new OpenAPI()
-                .info(new Info().title("Go Career API")
-                        .description(
-                                "GoCareer REST API documentation.")
-                        .version("v1.0.0")
-                        .license(new License().name("Apache 2.0").url("https://springdoc.org")))
-                .externalDocs(new ExternalDocumentation()
-                        .description("GoCareer Documentation")
-                        .url("https://gocareer.netlify.app/"));
-
-
         final String securitySchemeName = "bearerAuth";
         var openApi = new OpenAPI();
         openApi
@@ -48,6 +37,5 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));
         return openApi;
-
     }
 }
