@@ -10,6 +10,9 @@ public class GocareerApiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GocareerApiApplication.class, args);
+
+        String url = "http://localhost:8080/swagger-ui.html";
+        System.out.println("\n• Swagger UI is available at » " + url);
     }
 
 }
