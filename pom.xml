@@ -137,6 +137,13 @@
                         <configuration>
                             <finalName>unwanted</finalName>
                             <classifier>unwanted</classifier>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                    <mainClass>com.mypackage.MyClass</mainClass>
+                                </manifest>
+                            </archive>
                         </configuration>
                     </execution>
                 </executions>
