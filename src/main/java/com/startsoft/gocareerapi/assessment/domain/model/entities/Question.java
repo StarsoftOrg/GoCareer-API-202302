@@ -1,6 +1,5 @@
 package com.startsoft.gocareerapi.assessment.domain.model.entities;
 
-import com.startsoft.gocareerapi.assessment.domain.model.aggregates.VocacionalTest;
 import jakarta.persistence.*;
 import lombok.Getter;
 

@@ -40,10 +40,11 @@ public class Profile extends AbstractAggregateRoot<Profile> {
     private Date updatedAt;
 
 
-    public Profile(String fistName, String lastName, String email, Boolean specialist){
+    public Profile(String fistName, String lastName, String email, String description, Boolean specialist){
         this.name = new PersonName(fistName,lastName);
         this.email = new EmailAddress(email);
         this.specialist = new IsSpecialist(specialist);
+        this.description = new PersonDescription(description);
     }
 
     public Profile(){}

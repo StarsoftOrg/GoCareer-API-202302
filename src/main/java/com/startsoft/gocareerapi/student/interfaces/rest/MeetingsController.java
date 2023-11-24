@@ -1,6 +1,7 @@
 package com.startsoft.gocareerapi.student.interfaces.rest;
 
 import com.startsoft.gocareerapi.student.application.internal.commandservices.MeetingCommandServiceImpl;
+import com.startsoft.gocareerapi.student.domain.model.queries.GetAllMeetingsQuery;
 import com.startsoft.gocareerapi.student.domain.model.queries.GetMeetingByIdQuery;
 import com.startsoft.gocareerapi.student.domain.services.MeetingCommandService;
 import com.startsoft.gocareerapi.student.domain.services.MeetingQueryService;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -27,6 +30,14 @@ public class MeetingsController {
         this.meetingQueryService = meetingQueryService;
     }
 
+
+    @GetMapping
+    public ResponseEntity<List<MeetingResource>> getAllMeetings(){
+        var getAllMeetingsQuery = new GetAllMeetingsQuery();
+        var meetings = meetingQueryService.handle(getAllMeetingsQuery);
+        var meetingResources = meetings.stream().map(MeetingResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(meetingResources);
+    }
 
 
     @GetMapping("/{meetingId}")

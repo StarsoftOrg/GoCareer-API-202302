@@ -5,7 +5,7 @@ import lombok.Getter;
 
 
 @Entity
-public class VocacionalTest {
+public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -25,7 +25,7 @@ public class VocacionalTest {
 //    private List<Question> Questions;
 
 
-    public VocacionalTest(String Title, String Description, int numberQuestions) {
+    public Evaluation(String Title, String Description, int numberQuestions) {
         if (Title == null || Title.isBlank() ) {
             throw new IllegalArgumentException("Title can not be null");
         }
@@ -41,7 +41,7 @@ public class VocacionalTest {
         this.numberQuestions = numberQuestions;
     }
 
-    public VocacionalTest() {
+    public Evaluation() {
 
     }
 }

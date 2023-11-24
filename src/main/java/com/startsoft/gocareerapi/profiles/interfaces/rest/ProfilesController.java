@@ -1,5 +1,7 @@
 package com.startsoft.gocareerapi.profiles.interfaces.rest;
 
+import com.startsoft.gocareerapi.assessment.domain.model.queries.GetAllEvaluationsQuery;
+import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.EvaluationResourceFromEntityAssembler;
 import com.startsoft.gocareerapi.profiles.domain.model.queries.GetAllProfilesQuery;
 import com.startsoft.gocareerapi.profiles.domain.model.queries.GetProfileByIdQuery;
 import com.startsoft.gocareerapi.profiles.domain.services.ProfileCommandService;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/profiles", produces = MediaType.APPLICATION_JSON_VALUE)
-@Tag(name = "Profiles", description = "Profile Management Endpoints")
+@Tag(name = "Profiles", description = "Profiles Management Endpoints")
 public class ProfilesController {
 
     private final ProfileCommandService profileCommandService;
@@ -39,6 +41,7 @@ public class ProfilesController {
         if(profileId == 0L){
             return ResponseEntity.badRequest().build();
         }
+
         var getProfileByIdQuery = new GetProfileByIdQuery(profileId);
         var profile = profileQueryService.handle(getProfileByIdQuery);
 
@@ -65,10 +68,11 @@ public class ProfilesController {
 
 
     @GetMapping
-    public ResponseEntity<List<ProfileResource>> getAllProfiles(){
+    public ResponseEntity<List<ProfileResource>> getAllProfiles() {
         var getAllProfilesQuery = new GetAllProfilesQuery();
         var profiles = profileQueryService.handle(getAllProfilesQuery);
-        var profileResources = profiles.stream().map(ProfileResourceFromEntityAssembler::toResourceFromEntity).toList();
+        var profileResources = profiles.stream()
+                .map(ProfileResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(profileResources);
     }
 
