@@ -56,5 +56,18 @@ public class VocionalTestsController {
     }
 
 
+    @GetMapping("/{vocacionalTestId}")
+    public ResponseEntity<VocacionalTestResource> getVocacionalTestById(@PathVariable Long vocacionalTestId){
+        var getVocacionalTestByIdQuery = new GetVocacionalTestByIdQuery(vocacionalTestId);
+        var vocacionalTest = vocacionalTestQueryService.handle(getVocacionalTestByIdQuery);
+
+        if (vocacionalTest.isEmpty()) return ResponseEntity.notFound().build();
+
+        var vocacionalTestResource = VocacionalTestResourceFromEntityAssembler.toResourceFromEntity(vocacionalTest.get());
+
+        return ResponseEntity.ok(vocacionalTestResource);
+    }
+
+
 
 }
