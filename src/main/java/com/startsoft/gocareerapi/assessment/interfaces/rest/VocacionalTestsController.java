@@ -20,12 +20,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/vacacionaltests",produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Vocacional Tests", description = "Vocacional Tests Management Endpoints")
-public class VocionalTestsController {
+public class VocacionalTestsController {
 
     private final VocacionalTestCommandService vocacionalTestCommandService;
     private final VocacionalTestQueryService vocacionalTestQueryService;
 
-    public VocionalTestsController(VocacionalTestCommandService vocacionalTestCommandService, VocacionalTestQueryService vocacionalTestQueryService) {
+    public VocacionalTestsController(VocacionalTestCommandService vocacionalTestCommandService, VocacionalTestQueryService vocacionalTestQueryService) {
         this.vocacionalTestCommandService = vocacionalTestCommandService;
         this.vocacionalTestQueryService = vocacionalTestQueryService;
     }

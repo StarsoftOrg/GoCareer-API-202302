@@ -39,6 +39,7 @@
         </dependency>
 
 
+
         <!-- https://mvnrepository.com/artifact/io.github.encryptorcode/pluralize -->
         <dependency>
             <groupId>io.github.encryptorcode</groupId>
