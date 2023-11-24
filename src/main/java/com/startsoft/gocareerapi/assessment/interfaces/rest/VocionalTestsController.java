@@ -1,16 +1,19 @@
 package com.startsoft.gocareerapi.assessment.interfaces.rest;
 
-import com.startsoft.gocareerapi.assessment.domain.model.aggregates.VocacionalTest;
+import com.startsoft.gocareerapi.assessment.domain.model.queries.GetAllVocacionalTestsQuery;
+import com.startsoft.gocareerapi.assessment.domain.model.queries.GetVocacionalTestByIdQuery;
 import com.startsoft.gocareerapi.assessment.domain.services.VocacionalTestCommandService;
+import com.startsoft.gocareerapi.assessment.domain.services.VocacionalTestQueryService;
 import com.startsoft.gocareerapi.assessment.interfaces.rest.resources.CreateVocacionalTestResource;
+import com.startsoft.gocareerapi.assessment.interfaces.rest.resources.VocacionalTestResource;
 import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.CreateVocacionalTestCommandFromResourceAssembler;
+import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.VocacionalTestResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -19,21 +22,39 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Tag(name = "Vocacional Tests", description = "Vocacional Tests Management Endpoints")
 public class VocionalTestsController {
 
-    private VocacionalTestCommandService vocacionalTestCommandService;
+    private final VocacionalTestCommandService vocacionalTestCommandService;
+    private final VocacionalTestQueryService vocacionalTestQueryService;
 
-    public VocionalTestsController(VocacionalTestCommandService vocacionalTestCommandService) {
+    public VocionalTestsController(VocacionalTestCommandService vocacionalTestCommandService, VocacionalTestQueryService vocacionalTestQueryService) {
         this.vocacionalTestCommandService = vocacionalTestCommandService;
+        this.vocacionalTestQueryService = vocacionalTestQueryService;
     }
 
     @PostMapping
-    public ResponseEntity<VocacionalTest> createMeeting(@RequestBody CreateVocacionalTestResource createVocacionalTestResource) {
+    public ResponseEntity<VocacionalTestResource> createVocacionalTest(@RequestBody CreateVocacionalTestResource createVocacionalTestResource) {
         var createVocacionalTestCommand = CreateVocacionalTestCommandFromResourceAssembler.toCommandFromResource(createVocacionalTestResource);
         var vocacionalTestId = vocacionalTestCommandService.handle(createVocacionalTestCommand);
         if (vocacionalTestId == 0L) return ResponseEntity.badRequest().build();
 
+        var getVocacionalTestbyIdQuery = new GetVocacionalTestByIdQuery(vocacionalTestId);
+        var vocacionalTest = vocacionalTestQueryService.handle(getVocacionalTestbyIdQuery);
+        if (vocacionalTest.isEmpty()) return ResponseEntity.notFound().build();
 
+        var vocacionalTestResource = VocacionalTestResourceFromEntityAssembler.toResourceFromEntity(vocacionalTest.get());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(vocacionalTestResource, HttpStatus.CREATED);
     }
+
+
+    @GetMapping()
+    public ResponseEntity<List<VocacionalTestResource>> getAllVocacionalTests() {
+        var getAllVocacionalTestsQuery = new GetAllVocacionalTestsQuery();
+        var vocacionalTests = vocacionalTestQueryService.handle(getAllVocacionalTestsQuery);
+        var vocacionalTestResources = vocacionalTests.stream()
+                .map(VocacionalTestResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(vocacionalTestResources);
+    }
+
+
 
 }
