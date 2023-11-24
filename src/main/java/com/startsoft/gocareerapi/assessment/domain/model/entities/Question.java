@@ -1,6 +1,6 @@
-package com.startsoft.gocareerapi.student.domain.model.entities;
+package com.startsoft.gocareerapi.assessment.domain.model.entities;
 
-import com.startsoft.gocareerapi.student.domain.model.agreggates.VocacionalTest;
+import com.startsoft.gocareerapi.assessment.domain.model.aggregates.VocacionalTest;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -11,9 +11,9 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @ManyToOne
-    @JoinColumn(name = "voacational_test_id")
-    private VocacionalTest vocacionalTest;
+//    @ManyToOne
+//    @JoinColumn(name = "voacational_test_id")
+//    private VocacionalTest vocacionalTest;
 
     @Getter
     private String Title;
