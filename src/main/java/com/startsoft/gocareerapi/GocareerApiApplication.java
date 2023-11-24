@@ -17,5 +17,14 @@ public class GocareerApiApplication {
         String url = "http://localhost:8080/swagger-ui.html";
         System.out.println("\n• Swagger UI is available at » " + url);
     }
-
+    //Cors
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings (CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+            }
+        };
+    }
 }
