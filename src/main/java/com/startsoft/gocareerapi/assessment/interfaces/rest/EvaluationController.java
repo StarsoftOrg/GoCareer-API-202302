@@ -20,6 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/evaluations",produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Evaluations", description = "Evaluations Management Endpoints")
+@CrossOrigin(origins = "*")
 public class EvaluationController {
 
     private final EvaluationCommandService evaluationCommandService;
@@ -46,7 +47,6 @@ public class EvaluationController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:4200",allowCredentials = "false",allowedHeaders = "*",exposedHeaders = "*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.HEAD,RequestMethod.TRACE},maxAge = 3600)
     @GetMapping()
     public ResponseEntity<List<EvaluationResource>> getAllevaluations() {
         var getAllEvaluationsQuery = new GetAllEvaluationsQuery();
