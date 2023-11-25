@@ -3,8 +3,10 @@ package com.startsoft.gocareerapi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableJpaAuditing
@@ -17,5 +19,13 @@ public class GocareerApiApplication {
         String url = "http://localhost:8080/swagger-ui.html";
         System.out.println("\n• Swagger UI is available at » " + url);
     }
-    //Cors
+
+    @Configuration
+    @EnableWebMvc
+    public class CorsConfiguration implements WebMvcConfigurer {
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**").allowedMethods("GET", "POST");
+        }
+    }
 }
