@@ -20,12 +20,14 @@ public class GocareerApiApplication {
         System.out.println("\n• Swagger UI is available at » " + url);
     }
 
-    @Configuration
-    @EnableWebMvc
-    public class CorsConfiguration implements WebMvcConfigurer {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**").allowedMethods("GET", "POST");
-        }
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*").allowedHeaders("*");
+            }
+        };
     }
 }

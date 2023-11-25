@@ -20,7 +20,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/evaluations",produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Evaluations", description = "Evaluations Management Endpoints")
-@CrossOrigin(origins = "*")
 public class EvaluationController {
 
     private final EvaluationCommandService evaluationCommandService;
