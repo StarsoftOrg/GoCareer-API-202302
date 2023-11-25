@@ -102,6 +102,5 @@ public class WebSecurityConfiguration {
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authorizationRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
-
     }
 }
