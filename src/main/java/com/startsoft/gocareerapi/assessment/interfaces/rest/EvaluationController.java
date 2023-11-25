@@ -46,6 +46,7 @@ public class EvaluationController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200",allowCredentials = "false",allowedHeaders = "*",exposedHeaders = "*",methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE,RequestMethod.OPTIONS,RequestMethod.HEAD,RequestMethod.TRACE},maxAge = 3600)
     @GetMapping()
     public ResponseEntity<List<EvaluationResource>> getAllevaluations() {
         var getAllEvaluationsQuery = new GetAllEvaluationsQuery();
