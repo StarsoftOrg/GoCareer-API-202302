@@ -11,18 +11,24 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
 
 /**
  * Web security configuration
  */
 @Configuration
 @EnableMethodSecurity
+@EnableWebSecurity
 public class WebSecurityConfiguration {
 
     private final UserDetailsService userDetailsService;
@@ -87,7 +93,15 @@ public class WebSecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrfConfigurer -> csrfConfigurer.disable())
+        http.cors(cors -> cors.configurationSource(request -> {
+            CorsConfiguration corsConfig = new CorsConfiguration();
+            corsConfig.setAllowedOrigins(Arrays.asList("https://go-career.web.app", "http://localhost:4200"));
+            corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+            corsConfig.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+            corsConfig.setAllowCredentials(true);
+            return corsConfig;
+        }));
+        http.csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(unauthorizedRequestHandler))
                 .sessionManagement( customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
