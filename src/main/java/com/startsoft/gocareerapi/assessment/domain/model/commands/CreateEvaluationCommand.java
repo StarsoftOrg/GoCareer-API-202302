@@ -1,4 +1,4 @@
 package com.startsoft.gocareerapi.assessment.domain.model.commands;
 
-public record CreateEvaluationCommand(String Title, String Description, int numberQuestions) {
+public record CreateEvaluationCommand(String title, String description, int numberQuestions) {
 }

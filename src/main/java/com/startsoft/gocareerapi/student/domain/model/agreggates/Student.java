@@ -15,36 +15,36 @@ public class Student {
     private Long id;
 
     @Getter
-    private String FirstName;
+    private String firstName;
 
     @Getter
-    private String LastName;
+    private String lastName;
 
     @Getter
     @Email
-    private String Email;
+    private String email;
 
 
     public Student() {
     }
 
 
-    public Student (String FirstName, String LastName, String Email){
-        if (FirstName == null) {
+    public Student (String firstName, String lastName, String email){
+        if (firstName == null) {
             throw new IllegalArgumentException("FirstName can not be null");
         }
 
-        if (LastName == null) {
+        if (lastName == null) {
             throw new IllegalArgumentException("LastName can not be null");
         }
 
-        if (Email == null) {
+        if (email == null) {
             throw new IllegalArgumentException("Email can not be null");
         }
 
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Email = Email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
 }

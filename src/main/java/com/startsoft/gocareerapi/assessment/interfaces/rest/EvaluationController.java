@@ -6,7 +6,7 @@ import com.startsoft.gocareerapi.assessment.domain.services.EvaluationCommandSer
 import com.startsoft.gocareerapi.assessment.domain.services.EvaluationQueryService;
 import com.startsoft.gocareerapi.assessment.interfaces.rest.resources.CreateEvaluationResource;
 import com.startsoft.gocareerapi.assessment.interfaces.rest.resources.EvaluationResource;
-import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.CreateEvaluationtCommandFromResourceAssembler;
+import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.CreateEvaluationCommandFromResourceAssembler;
 import com.startsoft.gocareerapi.assessment.interfaces.rest.transform.EvaluationResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -31,8 +31,8 @@ public class EvaluationController {
     }
 
     @PostMapping
-    public ResponseEntity<EvaluationResource> createevaluation(@RequestBody CreateEvaluationResource createEvaluationResource) {
-        var createEvaluationCommand = CreateEvaluationtCommandFromResourceAssembler.toCommandFromResource(createEvaluationResource);
+    public ResponseEntity<EvaluationResource> createEvaluation(@RequestBody CreateEvaluationResource createEvaluationResource) {
+        var createEvaluationCommand = CreateEvaluationCommandFromResourceAssembler.toCommandFromResource(createEvaluationResource);
         var evaluationId = evaluationCommandService.handle(createEvaluationCommand);
         if (evaluationId == 0L) return ResponseEntity.badRequest().build();
 
@@ -47,7 +47,7 @@ public class EvaluationController {
 
 
     @GetMapping()
-    public ResponseEntity<List<EvaluationResource>> getAllevaluations() {
+    public ResponseEntity<List<EvaluationResource>> getAllEvaluations() {
         var getAllEvaluationsQuery = new GetAllEvaluationsQuery();
         var evaluations = evaluationQueryService.handle(getAllEvaluationsQuery);
         var evaluationResources = evaluations.stream()
@@ -57,7 +57,7 @@ public class EvaluationController {
 
 
     @GetMapping("/{evaluationId}")
-    public ResponseEntity<EvaluationResource> getevaluationById(@PathVariable Long evaluationId){
+    public ResponseEntity<EvaluationResource> getEvaluationById(@PathVariable Long evaluationId){
         var getEvaluationByIdQuery = new GetEvaluationByIdQuery(evaluationId);
         var evaluation = evaluationQueryService.handle(getEvaluationByIdQuery);
 

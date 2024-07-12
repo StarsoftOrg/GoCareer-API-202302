@@ -20,7 +20,7 @@ public class MeetingCommandServiceImpl implements MeetingCommandService {
 
     @Override
     public Long handle(CreateMeetingCommand command) {
-        var meeting = new Meeting(command.Title(),command.Description(),command.Date());
+        var meeting = new Meeting(command.title(),command.description(),command.date());
         meetingRepository.save(meeting);
         return meeting.getId();
     }

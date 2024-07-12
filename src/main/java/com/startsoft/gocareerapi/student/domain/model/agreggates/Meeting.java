@@ -14,41 +14,41 @@ public class Meeting {
     @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Getter
-    String Title;
+    String title;
 
     @Getter
-    String Description;
+    String description;
 
     /**
      * The date of the metting.
      */
     @Getter
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private Date Date;
+    private Date date;
 
     public Meeting() {
     }
 
 
-    public Meeting(String Title, String Description, Date Date){
-        if (Title == null || Title.isBlank() ) {
+    public Meeting(String title, String description, Date date){
+        if (title == null || title.isBlank() ) {
             throw new IllegalArgumentException("Title can not be null");
         }
 
-        if (Description == null || Description.isBlank() ) {
+        if (description == null || description.isBlank() ) {
             throw new IllegalArgumentException("Description can not be null");
         }
 
-        if (Date == null ) {
+        if (date == null ) {
             throw new IllegalArgumentException("Date can not be null");
         }
 
-        this.Title = Title;
-        this.Description = Description;
-        this.Date = Date;
+        this.title = title;
+        this.description = description;
+        this.date = date;
 
     }
 }

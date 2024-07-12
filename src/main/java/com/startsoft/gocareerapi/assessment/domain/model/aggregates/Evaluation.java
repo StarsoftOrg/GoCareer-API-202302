@@ -12,10 +12,10 @@ public class Evaluation {
     private Long id;
 
     @Getter
-    private String Title;
+    private String title;
 
     @Getter
-    private String Description;
+    private String description;
 
     @Getter
     private int numberQuestions;
@@ -25,19 +25,19 @@ public class Evaluation {
 //    private List<Question> Questions;
 
 
-    public Evaluation(String Title, String Description, int numberQuestions) {
-        if (Title == null || Title.isBlank() ) {
+    public Evaluation(String title, String description, int numberQuestions) {
+        if (title == null || title.isBlank() ) {
             throw new IllegalArgumentException("Title can not be null");
         }
-        if (Description == null || Description.isBlank() ) {
+        if (description == null || description.isBlank() ) {
             throw new IllegalArgumentException("Description can not be null");
         }
         if (numberQuestions <= 0 ) {
             throw new IllegalArgumentException("numberQuestions can not be null");
         }
 
-        this.Title = Title;
-        this.Description = Description;
+        this.title = title;
+        this.description = description;
         this.numberQuestions = numberQuestions;
     }
 

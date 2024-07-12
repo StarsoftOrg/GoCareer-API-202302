@@ -5,26 +5,26 @@ import lombok.Getter;
 
 @Entity
 public class Question {
-    @jakarta.persistence.Id
+    @Id
     @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
 //    @ManyToOne
 //    @JoinColumn(name = "voacational_test_id")
 //    private VocacionalTest vocacionalTest;
 
     @Getter
-    private String Title;
+    private String title;
 
     public Question() {
     }
 
-    public Question(String Title) {
-        if (Title == null || Title.isBlank() ) {
+    public Question(String title) {
+        if (title == null || title.isBlank() ) {
             throw new IllegalArgumentException("Title can not be null");
         }
-        this.Title = Title;
+        this.title = title;
     }
 
 }

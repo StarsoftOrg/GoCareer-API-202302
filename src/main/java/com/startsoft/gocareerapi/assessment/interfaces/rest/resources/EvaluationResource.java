@@ -1,4 +1,4 @@
 package com.startsoft.gocareerapi.assessment.interfaces.rest.resources;
 
-public record EvaluationResource(Long id, String Title, String Description, int numberQuestions) {
+public record EvaluationResource(Long id, String title, String description, int numberQuestions) {
 }

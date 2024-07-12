@@ -17,8 +17,8 @@ public class EvaluationCommandServiceImpl implements EvaluationCommandService {
 
     @Override
     public Long handle(CreateEvaluationCommand command) {
-        var vocacionalTest = new Evaluation(command.Title(), command.Description(), command.numberQuestions());
-        evaluationRepository.save(vocacionalTest);
-        return vocacionalTest.getId();
+        var vocationalTest = new Evaluation(command.title(), command.description(), command.numberQuestions());
+        evaluationRepository.save(vocationalTest);
+        return vocationalTest.getId();
     }
 }

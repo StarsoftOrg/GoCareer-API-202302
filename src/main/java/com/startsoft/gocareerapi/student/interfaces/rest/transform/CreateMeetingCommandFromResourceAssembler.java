@@ -6,9 +6,9 @@ import com.startsoft.gocareerapi.student.interfaces.rest.resources.CreateMeeting
 public class CreateMeetingCommandFromResourceAssembler {
     public static CreateMeetingCommand toCommandFromResource(CreateMeetingResource resource) {
         return new CreateMeetingCommand(
-                resource.Title(),
-                resource.Description(),
-                resource.Date());
+                resource.title(),
+                resource.description(),
+                resource.date());
     }
 
 }
